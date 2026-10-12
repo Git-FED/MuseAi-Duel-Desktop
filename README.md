@@ -1,4 +1,4 @@
-# 🖥️ Dual-Muse desktop wrapper and Android launcher
+# 🖥️ Dual-Muse desktop wrapper and Android launcher 🖥️
 
 <img width="1421" height="889" alt="Screenshot 2026-10-12 190934" src="https://github.com/user-attachments/assets/1c239771-1ca1-4886-b29c-14ff099a1e20" />
 
