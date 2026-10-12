@@ -9,6 +9,11 @@ jobs:
   build-windows-desktop:
     runs-on: windows-latest
 
+    defaults:
+      run:
+        shell: bash
+        working-directory: dual-muse-desktop
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -18,47 +23,28 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Find Windows desktop app
-        id: desktop
-        shell: bash
+      - name: Check desktop project files
         run: |
           set -euo pipefail
 
-          package_file="$(find . -type f \
-            -path '*/desktop-electron/package.json' \
-            -not -path '*/node_modules/*' \
-            -print -quit)"
+          echo "Desktop project: dual-muse-desktop"
 
-          if [[ -z "$package_file" ]]; then
-            echo "::error::Could not find desktop-electron/package.json in the checked-out repository."
-            echo "Available package.json files:"
-            find . -type f -name package.json \
-              -not -path '*/node_modules/*' -print
+          if [[ ! -f package.json ]]; then
+            echo "::error::Missing dual-muse-desktop/package.json."
             exit 1
           fi
 
-          desktop_dir="$(dirname "$package_file")"
-          echo "Electron project: $desktop_dir"
-
-          if [[ ! -f "$desktop_dir/package-lock.json" ]]; then
-            echo "::error::Missing $desktop_dir/package-lock.json. Generate and commit the lockfile before using npm ci."
+          if [[ ! -f package-lock.json ]]; then
+            echo "::error::Missing dual-muse-desktop/package-lock.json."
             exit 1
           fi
-
-          echo "dir=$desktop_dir" >> "$GITHUB_OUTPUT"
 
       - name: Install desktop dependencies
-        shell: bash
-        working-directory: ${{ steps.desktop.outputs.dir }}
         run: |
           set -euo pipefail
-          node --version
-          npm --version
           npm ci
 
       - name: Build Windows desktop app
-        shell: bash
-        working-directory: ${{ steps.desktop.outputs.dir }}
         run: |
           set -euo pipefail
           npm run dist
@@ -67,5 +53,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: muse-number-two-windows
-          path: '${{ steps.desktop.outputs.dir }}/dist/*'
+          path: dual-muse-desktop/dist/*
           if-no-files-found: error
