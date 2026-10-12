@@ -1,4 +1,4 @@
-# Dual-Muse desktop
+# Dual-Muse desktop Launcher
 
 <img width="2560" height="1440" alt="muse_13_comical_windows_crash" src="https://github.com/user-attachments/assets/2cdd3882-cb0c-44f0-8903-46cde687732d" />
  launcher
