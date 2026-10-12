@@ -8,21 +8,53 @@ on:
 jobs:
   build-windows-desktop:
     runs-on: windows-latest
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+
       - name: Find and build Windows desktop app
         shell: bash
         run: |
           set -euo pipefail
-          desktop_dir="$(dirname "$(find . -type f -path '*/desktop-electron/package.json' -print -quit)")"
-          test -n "$desktop_dir" && test -f "$desktop_dir/package-lock.json"
+
+          package_file="$(find . -type f \
+            -not -path '*/node_modules/*' \
+            -path '*/desktop-electron/package.json' \
+            -print -quit)"
+
+          if [[ -z "$package_file" ]]; then
+            echo "::error::Could not find desktop-electron/package.json."
+            echo "Available package.json files:"
+            find . -type f \
+              -not -path '*/node_modules/*' \
+              -name package.json -print
+            exit 1
+          fi
+
+          desktop_dir="$(dirname "$package_file")"
           echo "Electron project: $desktop_dir"
-          (cd "$desktop_dir" && npm ci && npm run dist)
+
+          if [[ ! -f "$desktop_dir/package-lock.json" ]]; then
+            echo "::error::Missing $desktop_dir/package-lock.json. Generate and commit the lockfile before using npm ci."
+            echo "Project directory contents:"
+            ls -la "$desktop_dir"
+            exit 1
+          fi
+
+          cd "$desktop_dir"
+
+          echo "Installing dependencies..."
+          npm ci
+
+          echo "Building Windows desktop app..."
+          npm run dist
+
       - name: Upload Windows artifacts
         uses: actions/upload-artifact@v4
         with:
