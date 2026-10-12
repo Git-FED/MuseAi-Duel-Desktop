@@ -1,4 +1,7 @@
-# Dual-Muse desktop wrapper and Android launcher
+# Dual-Muse desktop
+
+<img width="2560" height="1440" alt="muse_13_comical_windows_crash" src="https://github.com/user-attachments/assets/2cdd3882-cb0c-44f0-8903-46cde687732d" />
+ launcher
 
 This package includes an unofficial Android Muse launcher and a Dual-Muse Electron desktop wrapper. The desktop app opens **two completely separate Muse browser instances side by side** in one split-screen window.
 
