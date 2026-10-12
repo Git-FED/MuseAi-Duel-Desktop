@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dual-Muse</title>
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #11182f; }
+    .split { display: grid; grid-template-columns: minmax(0, 1fr) 4px minmax(0, 1fr); width: 100vw; height: 100vh; }
+    .divider { background: #11182f; box-shadow: inset 1px 0 #3c4668, inset -1px 0 #3c4668; }
+    webview { display: block; width: 100%; height: 100%; border: 0; background: #fff; }
+  </style>
+</head>
+<body>
+  <main class="split" aria-label="Dual-Muse split screen">
+    <webview id="left-muse" src="https://muse.ai/" partition="persist:dual-muse-left" webpreferences="contextIsolation=yes, nodeIntegration=no, sandbox=yes"></webview>
+    <div class="divider" aria-hidden="true"></div>
+    <webview id="right-muse" src="https://muse.ai/" partition="persist:dual-muse-right" webpreferences="contextIsolation=yes, nodeIntegration=no, sandbox=yes"></webview>
+  </main>
+  <script src="renderer.js"></script>
+</body>
+</html>

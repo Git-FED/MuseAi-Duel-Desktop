@@ -19,7 +19,7 @@
       "output": "dist",
       "buildResources": "assets"
     },
-    "files": ["main.js", "package.json", "assets/**/*"],
+    "files": ["main.js", "index.html", "renderer.js", "package.json", "assets/**/*"],
     "win": {
       "icon": "assets/icon.ico",
       "target": ["nsis", "portable"],
