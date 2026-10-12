@@ -4,16 +4,21 @@
 
 This package includes an unofficial Android Muse launcher and a Dual-Muse Electron desktop wrapper. The desktop app opens **two completely separate Muse browser instances side by side** in one split-screen window using two native Electron webviews.
 
+<img width="1918" height="1079" alt="Screenshot 2026-10-12 192117" src="https://github.com/user-attachments/assets/ac165748-de85-4eec-951e-188e15bd935c" />
+
 Each side uses its own persistent Electron session partition:
 
 - Left browser: `persist:dual-muse-left`
 - Right browser: `persist:dual-muse-right`
+
+<img width="1918" height="1076" alt="Screenshot 2026-10-12 192404" src="https://github.com/user-attachments/assets/1a1e288d-7fd3-4957-af8e-b549b1eda8b5" />
 
 That means each side has independent cookies, local storage, cache, service workers, and login state. You can sign into different Muse accounts—or keep two independent Muse sessions—at the same time.
 
 Both desktop instances open `https://muse.ai/`. Normal HTTP(S) navigation stays inside each isolated pane; explicit external links open in the system browser.
 
 The Android project is under `dual-muse-apk/`. It opens `https://muse.ai/` in an Android WebView and keeps all HTTP(S) redirects—including authentication and account redirects—inside the app. Only mail and telephone links use external system handlers.
+
 
 ## Run the desktop app locally
 
