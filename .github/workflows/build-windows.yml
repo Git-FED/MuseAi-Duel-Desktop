@@ -8,24 +8,50 @@ on:
 jobs:
   build-windows-desktop:
     runs-on: windows-latest
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: dual-muse-desktop
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Find and build Windows desktop app
-        shell: bash
+
+      - name: Check desktop project files
         run: |
           set -euo pipefail
-          desktop_dir="$(dirname "$(find . -type f -path '*/desktop-electron/package.json' -print -quit)")"
-          test -n "$desktop_dir" && test -f "$desktop_dir/package-lock.json"
-          echo "Electron project: $desktop_dir"
-          (cd "$desktop_dir" && npm ci && npm run dist)
+
+          echo "Desktop project: dual-muse-desktop"
+
+          if [[ ! -f package.json ]]; then
+            echo "::error::Missing dual-muse-desktop/package.json."
+            exit 1
+          fi
+
+          if [[ ! -f package-lock.json ]]; then
+            echo "::error::Missing dual-muse-desktop/package-lock.json."
+            exit 1
+          fi
+
+      - name: Install desktop dependencies
+        run: |
+          set -euo pipefail
+          npm ci
+
+      - name: Build Windows desktop app
+        run: |
+          set -euo pipefail
+          npm run dist
+
       - name: Upload Windows artifacts
         uses: actions/upload-artifact@v4
         with:
           name: muse-number-two-windows
-          path: '**/desktop-electron/dist/*'
+          path: dual-muse-desktop/dist/*
           if-no-files-found: error
