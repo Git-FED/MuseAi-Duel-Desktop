@@ -1,0 +1,3 @@
+# Web2APK conversion prompt
+
+Convert this web experience into a complete Android Studio project. Bundle `site/` under `app/src/main/assets/site`; create `MainActivity.java` in `com.fedpromptly.musenumbertwo`; load `file:///android_asset/site/index.html`; enable JavaScript, DOM storage, file access, and safe back navigation; send HTTPS, mailto, and tel links to the system browser; create launcher resources for mdpi through xxxhdpi plus adaptive icon XML; include manifest, Gradle files, tests, ProGuard rules, wrapper files, and a GitHub Actions workflow. Verify offline launch, favicon, promo GIFs, referral code `5F2V31`, and launcher icon behavior.

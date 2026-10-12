@@ -1,0 +1,1 @@
+<resources><style name="Theme.MuseTwo" parent="Theme.AppCompat.DayNight.NoActionBar"><item name="android:windowBackground">@color/paper</item></style></resources>

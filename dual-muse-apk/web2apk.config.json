@@ -1,0 +1,10 @@
+{
+  "appName": "Muse Number Two",
+  "applicationId": "com.fedpromptly.musenumbertwo",
+  "url": "https://muse.ai",
+  "icon": "assets/icon.png",
+  "minSdk": 24,
+  "targetSdk": 35,
+  "offlineBundle": true,
+  "assetRoot": "app/src/main/assets/site"
+}

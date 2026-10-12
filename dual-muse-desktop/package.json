@@ -1,0 +1,40 @@
+{
+  "name": "dual-muse-desktop",
+  "version": "1.0.0",
+  "description": "Unofficial Dual-Muse split-screen desktop wrapper",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win nsis portable"
+  },
+  "devDependencies": {
+    "electron": "^32.2.0",
+    "electron-builder": "^25.0.0"
+  },
+  "build": {
+    "appId": "com.fedpromptly.dualmuse.desktop",
+    "productName": "Dual-Muse",
+    "directories": {
+      "output": "dist",
+      "buildResources": "assets"
+    },
+    "files": ["main.js", "package.json", "assets/**/*"],
+    "win": {
+      "icon": "assets/icon.ico",
+      "target": ["nsis", "portable"],
+      "artifactName": "Dual-Muse-${version}-${os}-${arch}.${ext}"
+    },
+    "linux": {
+      "icon": "assets/icon.png",
+      "target": ["AppImage"]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Dual-Muse"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "token-town",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Animated Token Town promotional landing page",
+  "scripts": {
+    "start": "python3 -m http.server 8080"
+  }
+}
